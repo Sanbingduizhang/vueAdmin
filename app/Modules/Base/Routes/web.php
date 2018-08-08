@@ -12,5 +12,5 @@
 */
 
 Route::group(['prefix' => 'base'], function () {
-    Route::post('/login', 'ApiBaseController@login');
+    Route::post('/login', 'BaseController@login');
 });

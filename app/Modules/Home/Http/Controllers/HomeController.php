@@ -2,14 +2,19 @@
 
 namespace App\Modules\Home\Http\Controllers;
 
+use App\Modules\Base\Http\Controllers\ApiBaseController;
 use Illuminate\Http\Request;
 
-use App\Http\Controllers\Controller;
 
-class HomeController extends Controller
+class HomeController extends ApiBaseController
 {
+    public function __construct()
+    {
+
+    }
+
     public function test(Request $request)
     {
-        dd($request->get('jwt'));
+        dd($request->get('user_msg'));
     }
 }
