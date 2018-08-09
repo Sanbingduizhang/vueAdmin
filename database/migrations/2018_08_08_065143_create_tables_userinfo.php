@@ -28,7 +28,7 @@ class CreateTablesUserinfo extends Migration
                 $table->string('email')->nullable()->default(NULL)->commit('邮箱');
                 $table->integer('iphone')->nullable()->default(NULL)->commit('手机');
                 $table->string('birthday')->nullable()->default(NULL)->commit('生日');
-                $table->integer('sex')->nullable()->default(NULL)->commit('性别');
+                $table->integer('sex')->nullable()->default(NULL)->commit('性别1-男2-女3-未知');
                 $table->integer('status')->default(1)->commit('状态-1-使用2-禁用-3-删除');
                 $table->string('name')->nullable()->default('匿名')->commit('用户名称');
                 $table->timestamps();

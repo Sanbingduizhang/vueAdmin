@@ -6,6 +6,7 @@ use Illuminate\Database\Migrations\Migration;
 
 class CreateCacheTable extends Migration
 {
+    protected $table = 'cache';
     /**
      * Run the migrations.
      *
@@ -13,11 +14,14 @@ class CreateCacheTable extends Migration
      */
     public function up()
     {
-        Schema::create('cache', function (Blueprint $table) {
-            $table->string('key')->unique();
-            $table->mediumText('value');
-            $table->integer('expiration');
-        });
+        if (!Schema::hasTable($this->table)) {
+            Schema::create('cache', function (Blueprint $table) {
+                $table->string('key')->unique();
+                $table->mediumText('value');
+                $table->integer('expiration');
+            });
+        }
+
     }
 
     /**
@@ -27,6 +31,8 @@ class CreateCacheTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('cache');
+        if (Schema::hasTable($this->table) || \DB::table($this->table)->count() <1) {
+            Schema::dropIfExists('cache');
+        }
     }
 }
