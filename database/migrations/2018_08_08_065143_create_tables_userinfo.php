@@ -31,6 +31,7 @@ class CreateTablesUserinfo extends Migration
                 $table->integer('sex')->nullable()->default(3)->comment('性别1-男2-女3-未知');
                 $table->integer('status')->default(1)->comment('状态-1-使用2-禁用-3-删除');
                 $table->string('name')->nullable()->default('匿名')->comment('用户名称');
+                $table->smallInteger('type')->nullable()->default(5)->comment('1-管理员2-高级会员3-超级会员4-顶级会员5-会员');
                 $table->dateTime('created_at')->comment('创建于');
                 $table->dateTime('updated_at')->comment('更新于');
             });
