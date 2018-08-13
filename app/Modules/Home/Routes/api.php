@@ -21,3 +21,4 @@ Route::group([
     'middleware' => ['checktoken']],function(){
     Route::get('/test','HomeController@test')->name('home.test');
 });
+Route::get('/weather','HomeController@weather');
