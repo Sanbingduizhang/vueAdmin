@@ -62,7 +62,7 @@ class CheckToken
         $cacheKey = config('basecache.user_info_get').$param['usercode'];
         $userinfo = Cache::get($cacheKey);
         if (empty($userinfo) || !is_array($userinfo)) {
-            $userinfo = $this->userInfoRepository->where(['userid' => $param['uid']])->first();
+            $userinfo = $this->userInfoRepository->where(['id' => $param['uid']])->first();
             if ($userinfo) {
                 $userinfo = $userinfo->toArray();
             } else {

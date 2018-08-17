@@ -21,7 +21,7 @@ class CreatePhotoReplayTable extends Migration
                 $table->charset = 'utf8mb4';
                 $table->collation = 'utf8mb4_general_ci';
                 //表的数据结构
-                $table->increments('preplyid')->comment('主键ID');
+                $table->increments('id')->comment('主键ID');
                 $table->integer('userid')->comment('用户id');
                 $table->integer('pcomid')->comment('图片回复的评论id');
                 $table->text('content')->nullable()->default(NULL)->comment('评论内容');

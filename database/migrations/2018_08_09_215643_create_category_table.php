@@ -21,8 +21,9 @@ class CreateCategoryTable extends Migration
                 $table->charset = 'utf8mb4';
                 $table->collation = 'utf8mb4_general_ci';
                 //表的数据结构
-                $table->increments('cateid')->comment('主键ID');
+                $table->increments('id')->comment('主键ID');
                 $table->string('name')->comment('分类名称');
+                $table->string('desc')->nullable()->default(NULL)->comment('分类描述');
                 $table->integer('pid')->nullable()->default(0)->comment('父id，默认0 是顶级');
                 $table->smallInteger('is_del')->nullable()->default(1)->comment('是否删除1-未删除2-删除3-禁用');
                 $table->dateTime('created_at')->nullable()->comment('创建于');

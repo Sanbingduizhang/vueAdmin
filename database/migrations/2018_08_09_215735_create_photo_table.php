@@ -21,7 +21,7 @@ class CreatePhotoTable extends Migration
                 $table->charset = 'utf8mb4';
                 $table->collation = 'utf8mb4_general_ci';
                 //表的数据结构
-                $table->increments('photoid')->comment('主键ID');
+                $table->increments('id')->comment('主键ID');
                 $table->integer('photocateid')->comment('分类id');
                 $table->integer('userid')->comment('用户id');
                 $table->string('img_thumb')->comment('缩略图');

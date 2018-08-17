@@ -74,8 +74,9 @@ dd($output);
         $client->get('/v1/service/v1/iat')->getBody();
     }
 
-    public function bd_go()
+    public function bd_go(Request $request)
     {
+        dd(getUser($request));
         return response_success(['message' => 222]);
         //setConnectionTimeoutInMillis	建立连接的超时时间（单位：毫秒)
         //setSocketTimeoutInMillis	通过打开的连接传输数据的超时时间（单位：毫秒）

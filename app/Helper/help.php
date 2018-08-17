@@ -26,3 +26,13 @@ if (!function_exists('response_failed')) {
         return response()->json(['status'=>'failed','code'=>$code,'message'=>$message]);
     }
 }
+
+if (!function_exists('getUser')) {
+    /**获取用户信息
+     * @param \Illuminate\Http\Request $request
+     * @return mixed
+     */
+    function getUser(\Illuminate\Http\Request $request) {
+        return $request->get('user_msg');
+    }
+}

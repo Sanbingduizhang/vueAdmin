@@ -21,7 +21,7 @@ class CreateArticleLikecountTable extends Migration
                 $table->charset = 'utf8mb4';
                 $table->collation = 'utf8mb4_general_ci';
                 //表的数据结构
-                $table->increments('alikeid')->comment('主键ID');
+                $table->increments('id')->comment('主键ID');
                 $table->integer('userid')->comment('用户id');
                 $table->integer('pid')->comment('图片相关的图片，评论，回复id');
                 $table->smallInteger('likego')->nullable()->default(1)->comment('是否点赞1-点赞2-取消赞（直接删除');

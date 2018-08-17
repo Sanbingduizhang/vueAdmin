@@ -21,7 +21,7 @@ class CreatePhotoCateTable extends Migration
                 $table->charset = 'utf8mb4';
                 $table->collation = 'utf8mb4_general_ci';
                 //表的数据结构
-                $table->increments('photocateid')->comment('主键ID');
+                $table->increments('id')->comment('主键ID');
                 $table->integer('userid')->comment('用户id');
                 $table->string('pname')->comment('相册名称');
                 $table->integer('pid')->nullable()->default(0)->comment('相册分类0-顶级分类');

@@ -4,6 +4,7 @@ namespace App\Exceptions;
 
 use Exception;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Support\Facades\Route;
 
 class Handler extends ExceptionHandler
 {
@@ -46,6 +47,11 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Exception $exception)
     {
+        $routePrefix = Route::current()->getPrefix();
+        if (strpos($routePrefix, 'api/') === 0) {
+            // if($exception instanceof ApiException) {
+            return response_failed($exception->getMessage());
+        }
         return parent::render($request, $exception);
     }
 }

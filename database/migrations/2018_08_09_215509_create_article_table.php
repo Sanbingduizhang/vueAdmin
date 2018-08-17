@@ -21,7 +21,7 @@ class CreateArticleTable extends Migration
                 $table->charset = 'utf8mb4';
                 $table->collation = 'utf8mb4_general_ci';
                 //表的数据结构
-                $table->increments('articleid')->comment('主键ID');
+                $table->increments('id')->comment('主键ID');
                 $table->integer('userid')->comment('用户的id');
                 $table->string('title')->comment('文章名称');
                 $table->string('desc')->nullable()->default(NULL)->comment('文章的描述');
