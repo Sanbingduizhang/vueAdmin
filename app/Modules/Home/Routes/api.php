@@ -22,3 +22,4 @@ Route::group([
     Route::get('/test','HomeController@test')->name('home.test');
 });
 Route::get('/weather','HomeController@weather');
+Route::get('/bd-go','HomeController@bd_go');

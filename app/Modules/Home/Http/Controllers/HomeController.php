@@ -9,6 +9,15 @@ use Illuminate\Http\Request;
 
 class HomeController extends ApiBaseController
 {
+    const APP_ID = '11689133';
+    const API_KEY = 'y3XQLsq5su5FkvAF4KxqMXik';
+    const SECRET_KEY = 'kVVSUgfc19vyDbg3FaL9nzIQyU0e6GPR';
+
+//setConnectionTimeoutInMillis	建立连接的超时时间（单位：毫秒)
+//setSocketTimeoutInMillis	通过打开的连接传输数据的超时时间（单位：毫秒）
+    protected $setConTimeOut = 5000;        //ms建立连接的超时时间（单位：毫秒)
+    protected $setSocTimeOut = 5000;        //ms通过打开的连接传输数据的超时时间（单位：毫秒）
+
     public function __construct()
     {
 
@@ -26,18 +35,6 @@ class HomeController extends ApiBaseController
      */
     public function weather(Request $request)
     {
-
-        /**
-         * @param string $url
-         * @return mixed
-         */
-//        $curl = $request->get('url',NULL);
-//        if (empty($curl)) {
-//            return response_failed('请输入地址');
-//        }
-//        $curl = 'https://www.sojson.com/open/api/weather/json.shtml?city=北京';
-//        $curl = 'http://www.weather.com.cn/data/cityinfo/101010100.html';
-//
         $curl =  'http://www.weather.com.cn/data/sk/101010100.html';
         //初始化
         $ch = curl_init();
@@ -77,4 +74,16 @@ dd($output);
         $client->get('/v1/service/v1/iat')->getBody();
     }
 
+    public function bd_go()
+    {
+        //setConnectionTimeoutInMillis	建立连接的超时时间（单位：毫秒)
+        //setSocketTimeoutInMillis	通过打开的连接传输数据的超时时间（单位：毫秒）
+        $apiOcr = new \AipOcr(self::APP_ID,self::API_KEY,self::SECRET_KEY);
+        $image = file_get_contents(public_path('timg.jpg'));
+        dd($image);
+
+// 调用通用文字识别, 图片参数为本地图片
+        $res = $apiOcr->basicGeneral($image);
+        dd($res);
+    }
 }
