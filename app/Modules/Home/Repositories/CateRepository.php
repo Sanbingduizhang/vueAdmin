@@ -29,13 +29,21 @@ class CateRepository extends BaseRepository
         ];
         return $options;
     }
+
+    /**
+     * 编辑时获取相关数据
+     * @param Request $request
+     * @return array
+     */
     public function editGet(Request $request)
     {
         $options = [
+            'id'    => $request->get('id',0),
             'name' => $request->get('name',''),
-            'pid' => $request->get('pid',0),
+//            'pid' => $request->get('pid',0),
             'desc' => $request->get('desc',''),
         ];
+        return $options;
     }
 
 }
