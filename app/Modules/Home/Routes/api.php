@@ -18,8 +18,11 @@ use Illuminate\Http\Request;
 //})->middleware('auth:api');
 Route::group([
     'prefix' => 'home',
-    'middleware' => ['checktoken']],function(){
+    'middleware' => ['cros','checktoken']],function(){
     Route::get('/test','HomeController@test')->name('home.test');
 });
-Route::get('/weather','HomeController@weather');
-Route::get('/bd-go','HomeController@bd_go');
+Route::group(['middleware' => ['cros','checktoken']],function () {
+    Route::get('/weather','HomeController@weather');
+    Route::get('/bd-go','HomeController@bd_go');
+});
+

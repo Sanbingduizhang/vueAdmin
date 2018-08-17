@@ -76,6 +76,7 @@ dd($output);
 
     public function bd_go()
     {
+        return response_success(['message' => 222]);
         //setConnectionTimeoutInMillis	建立连接的超时时间（单位：毫秒)
         //setSocketTimeoutInMillis	通过打开的连接传输数据的超时时间（单位：毫秒）
         $apiOcr = new \AipOcr(self::APP_ID,self::API_KEY,self::SECRET_KEY);
