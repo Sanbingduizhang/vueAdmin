@@ -46,6 +46,10 @@ class BaseController extends Controller
         return response_success(['token' => $token]);
 
     }
+    public function register(Request $request)
+    {
+        
+    }
 
     /**
      * @description 签发jwt token
