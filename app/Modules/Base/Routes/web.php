@@ -13,4 +13,5 @@
 
 Route::group(['prefix' => 'base'], function () {
     Route::post('/login', 'BaseController@login');
+    Route::post('/register', 'BaseController@register');
 });

@@ -23,6 +23,7 @@ Route::group([
 });
 Route::group(['middleware' => ['cros','checktoken']],function () {
     Route::get('/weather','HomeController@weather');
-    Route::get('/bd-go','HomeController@bd_go');
+//    Route::get('/bd-go','HomeController@bd_go');
 });
+Route::get('/bd-go','HomeController@bd_go');
 

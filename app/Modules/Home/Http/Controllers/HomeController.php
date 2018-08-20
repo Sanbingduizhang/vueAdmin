@@ -76,13 +76,14 @@ dd($output);
 
     public function bd_go(Request $request)
     {
-        dd(getUser($request));
-        return response_success(['message' => 222]);
+//        dd(222);
+//        dd(getUser($request));
+//        return response_success(['message' => 222]);
         //setConnectionTimeoutInMillis	建立连接的超时时间（单位：毫秒)
         //setSocketTimeoutInMillis	通过打开的连接传输数据的超时时间（单位：毫秒）
         $apiOcr = new \AipOcr(self::APP_ID,self::API_KEY,self::SECRET_KEY);
-        $image = file_get_contents(public_path('timg.jpg'));
-        dd($image);
+        $image = file_get_contents(public_path('timg1.jpg'));
+//        dd($image);
 
 // 调用通用文字识别, 图片参数为本地图片
         $res = $apiOcr->basicGeneral($image);

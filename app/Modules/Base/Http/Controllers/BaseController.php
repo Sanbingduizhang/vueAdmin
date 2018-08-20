@@ -46,9 +46,50 @@ class BaseController extends Controller
         return response_success(['token' => $token]);
 
     }
+
+    /**
+     * 注册接口
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function register(Request $request)
     {
-        
+        $usercode = htmlspecialchars($request->get('usercode',null));
+        $pwd = htmlspecialchars($request->get('password',null));
+
+        if (empty($usercode) || empty($pwd)) {
+            return response_failed('请输入用户名或密码');
+        }
+        //正则匹配账号
+        if (!preg_match('/^[a-zA-Z][a-zA-Z0-9_]{4,15}$/',$usercode)) {
+            return response_failed('账号由字母/数字/下划线组成(4~16),以字母开头');
+        }
+        //密码正则匹配
+        if (!preg_match('/^[a-zA-Z][a-zA-Z0-9_]{5,17}$/',$pwd)) {
+            return response_failed('密码有字母/数字/下划线组成(6~18),以字母开头');
+        }
+        //入库查询
+        $searchRes = $this->userInfoRepository
+            ->where(['usercode' => $usercode])
+            ->first();
+        if ($searchRes) {
+            //此处放回code=-2，则提醒是账号已经存在，
+            return response_failed('此账号已经存在',-2);
+        }
+        //进行入库操作
+        $create = $this->userInfoRepository->create([
+            'usercode' => $usercode,
+            'password' => md5($pwd),
+        ]);
+        if ($create) {
+            return response_success(['message' => '注册成功']);
+        }
+        return response_failed('注册失败');
+
+    }
+    public function mobileRegist()
+    {
+
     }
 
     /**
