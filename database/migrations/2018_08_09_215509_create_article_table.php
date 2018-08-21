@@ -34,6 +34,7 @@ class CreateArticleTable extends Migration
                 $table->integer('wordsnum')->nullable()->nullable()->default(0)->comment('文章数目');
                 $table->smallInteger('status')->nullable()->nullable()->default(1)->comment('审核状态1-通过2-不通过');
                 $table->smallInteger('is_pv_use')->nullable()->default(1)->comment('观看权限1-所有人2-指定人3-自己');
+                $table->smallInteger('is_del')->nullable()->default(1)->comment('是否删除1-不删除0-删除');
                 $table->dateTime('created_at')->nullable()->comment('创建于');
                 $table->dateTime('updated_at')->nullable()->comment('更新于');
             });

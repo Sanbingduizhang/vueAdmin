@@ -1,6 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -19,11 +19,23 @@ use Illuminate\Http\Request;
 Route::group([
     'prefix' => 'home',
     'middleware' => ['cros','checktoken']],function(){
+    //测试的几个接口
     Route::get('/test','HomeController@test')->name('home.test');
+    Route::get('/weather','HomeController@weather')->name('home.weather');
+    Route::get('/bd_go','HomeController@bd_go')->name('home.bd_go');
+    /**
+     * 主页显示接口
+     */
+    Route::get('/index_head','IndexController@index_head')->name('home.index_head');
 });
-Route::group(['middleware' => ['cros','checktoken']],function () {
-    Route::get('/weather','HomeController@weather');
-//    Route::get('/bd-go','HomeController@bd_go');
+Route::group([
+    'prefix' => 'home',
+    ],function(){
+    /**
+     * 主页显示接口
+     */
+    Route::get('/index_head','IndexController@index_head')->name('home.index_head');
+    Route::get('/index_mid','IndexController@index_mid')->name('home.index_mid');
+    Route::get('/index_right','IndexController@index_right')->name('home.index_right');
 });
-Route::get('/bd-go','HomeController@bd_go');
 

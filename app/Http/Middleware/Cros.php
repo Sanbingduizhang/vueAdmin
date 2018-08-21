@@ -16,10 +16,16 @@ class Cros
     public function handle($request, Closure $next)
     {
         $response = $next($request);
-        $response->header('Access-Control-Allow-Origin', config('base.cros_access'));
-        $response->header('Access-Control-Allow-Headers', 'Authorization,Origin, Content-Type, Cookie, Accept, multipart/form-data, application/json');
-        $response->header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, OPTIONS,DELETE');
-        $response->header('Access-Control-Allow-Credentials', 'true');
+
+        $response->header('Access-Control-Allow-Origin', config('cors.allowedOrigins'));
+        $response->header('Access-Control-Allow-Headers', config('cors.allowedHeaders'));
+        $response->header('Access-Control-Allow-Methods', config('cors.allowedMethods'));
+        $response->header('Access-Control-Allow-Credentials', config('cors.supportsCredentials'));
+//        $response->header('Access-Control-Allow-Origin', config('base.cros_access'));
+//        $response->header('Access-Control-Allow-Headers', 'Authorization,Origin, Content-Type, Cookie, Accept, multipart/form-data, application/json');
+//        $response->header('Access-Control-Allow-Methods', 'GET, POST, PATCH, PUT, OPTIONS,DELETE');
+//        $response->header('Access-Control-Allow-Credentials', 'true');
+
         return $response;
     }
 }
