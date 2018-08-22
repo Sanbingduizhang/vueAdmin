@@ -4,12 +4,9 @@ namespace App\Modules\Base\Http\Controllers;
 
 use App\Modules\Base\Repositories\UserInfoRepository;
 use Firebase\JWT\JWT;
-use Gregwar\Captcha\CaptchaBuilder;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Cache;
-use phpDocumentor\Reflection\Types\Null_;
 
 class BaseController extends Controller
 {
@@ -88,10 +85,6 @@ class BaseController extends Controller
             return response_success(['message' => '注册成功']);
         }
         return response_failed('注册失败');
-
-    }
-    public function mobileRegist()
-    {
 
     }
 
