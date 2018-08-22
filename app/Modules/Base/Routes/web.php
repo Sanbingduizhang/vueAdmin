@@ -10,8 +10,12 @@
 | to using a Closure or controller method. Build something great!
 |
 */
+use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix' => 'base'], function () {
     Route::post('/login', 'BaseController@login');
     Route::post('/register', 'BaseController@register');
+    //验证码
+    Route::get('/captcha','BaseController@captcha');
+    Route::get('/verifyCaptcha','BaseController@verifyCaptcha');
 });

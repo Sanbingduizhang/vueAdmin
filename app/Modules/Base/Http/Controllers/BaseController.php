@@ -4,9 +4,12 @@ namespace App\Modules\Base\Http\Controllers;
 
 use App\Modules\Base\Repositories\UserInfoRepository;
 use Firebase\JWT\JWT;
+use Gregwar\Captcha\CaptchaBuilder;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Cache;
+use phpDocumentor\Reflection\Types\Null_;
 
 class BaseController extends Controller
 {
@@ -120,5 +123,41 @@ class BaseController extends Controller
         ];
         $token = JWT::encode($payload,config('jwt.key'),config('jwt.alg'));
         return $token;
+    }
+
+    /**
+     * todo 修改路径问题
+     * 生成验证码
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function captcha(Request $request) {
+        //获取验证码
+        $res = get_or_check_captcha([
+                    'usercode' => $request->get('usercode','111111'),
+                    'cachekey' => 'login_',
+                ],'get');
+        //返回验证码图片的路径
+
+        return response_success(['src' => $res]);
+    }
+
+    /**
+     * 验证码的正确与否
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function verifyCaptcha(Request $request) {
+        //检测验证码正确与否
+        $res = get_or_check_captcha([
+                    'usercode' => $request->get('usercode',''),
+                    'cachekey' => 'login_',
+                    'check' => $request->get('captcha',''),
+                ],'check');
+
+        if ($res == true) {
+            return response_success(['message' => '验证通过']);
+        }
+        return response_failed('验证码错误');
     }
 }

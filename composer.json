@@ -11,11 +11,11 @@
         "caffeinated/modules": "^4.2",
         "fideloper/proxy": "^4.0",
         "firebase/php-jwt": "^5.0",
+        "gregwar/captcha": "^1.1",
         "guzzlehttp/guzzle": "^6.3",
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "laravelcollective/html": "^5.5",
-        "mews/captcha": "^2.2",
         "simplesoftwareio/simple-qrcode": "^2.0",
         "swooletw/laravel-swoole": "^2.4"
     },
