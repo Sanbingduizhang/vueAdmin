@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class HomeController extends ApiBaseController
 {
+    protected $uri;
     const APP_ID = '11689133';
     const API_KEY = 'y3XQLsq5su5FkvAF4KxqMXik';
     const SECRET_KEY = 'kVVSUgfc19vyDbg3FaL9nzIQyU0e6GPR';
