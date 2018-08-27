@@ -84,6 +84,7 @@ class WastonController extends Controller
      */
     public function addIntent()
     {
+//        export=true&include_audit=true&include_count=true&page_limit=100&sort=intent
         $url =  "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/86e2b89a-8bf9-4a33-a8d3-5b2a2b79583f/intents?version=2018-07-10";
         $data = [
                   "intent" => "pipi",
@@ -161,6 +162,7 @@ class WastonController extends Controller
      */
     public function getExample(Request $request)
     {
+//        export=true&include_count=true&page_limit=100&sort=text
         $ws = $request->get('ws','86e2b89a-8bf9-4a33-a8d3-5b2a2b79583f');
         $intent = $request->get('intent','hello');
         $url = "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/{$ws}/intents/{$intent}/examples?version=2018-07-10&export=true";
@@ -301,6 +303,25 @@ class WastonController extends Controller
 
     ///////-------dialog-------////
 
+
+//{dialog_node: "node_1_1535350019406", type: "standard", conditions: "#", parent: null,…}
+//conditions: "#"
+//dialog_node: "node_1_1535350019406"
+//metadata: {}
+//next_step: null
+//output: {generic: [{title: "dog",…}]}
+//generic: [{title: "dog",…}]
+//0: {title: "dog",…}
+//description: "dog image"
+//response_type: "image"
+//source: "https://ss0.bdstatic.com/94oJfD_bAAcT8t7mm9GUKT-xh_/timg?image&quality=100&size=b4000_4000&sec=1535350271&di=70027b4158a591f39cf5b0e3341cec50&src=http://img.25pp.com/uploadfile/app/icon/20160512/1462988180411384.jpg"
+//title: "dog"
+//parent: null
+//previous_sibling: "Welcome"
+//title: "dog"
+//type: "standard"
+
+
     /**
      * 创建dialog
      * @param Request $request
@@ -320,6 +341,42 @@ class WastonController extends Controller
     {
         $ws = $request->get('ws','86e2b89a-8bf9-4a33-a8d3-5b2a2b79583f');
         $url = "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/{$ws}/dialog_nodes?version=2018-07-10";
+        $return = $this->doGet($url);
+        return response_success(json_decode($return,true));
+    }
+
+    /**
+     * 获取对话节点
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * {
+            "status": "successful",
+            "code": 1,
+            "data": {
+                "type": "standard",
+                "title": "Greeting",
+                "output": {
+                    "generic": [
+                        {
+                            "values": [
+                                        {
+                                            "text": "Hi! How can I help you?"
+                                        }
+                                    ],
+                            "response_type": "text"
+                        }
+                    ]
+                },
+                "conditions": "#hello",
+                "dialog_node": "greeting"
+            }
+        }
+     */
+    public function getOneDialog(Request $request)
+    {
+        $ws = $request->get('ws','86e2b89a-8bf9-4a33-a8d3-5b2a2b79583f');
+        $dnode = $request->get('dnode','greeting');
+        $url = "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/{$ws}/dialog_nodes/{$dnode}?version=2018-07-10";
         $return = $this->doGet($url);
         return response_success(json_decode($return,true));
     }
@@ -376,8 +433,106 @@ class WastonController extends Controller
         return response_success(json_decode($return,true));
     }
 
+    /**
+     * 更新对话框节点
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     * {
+        "status": "successful",
+        "code": 1,
+        "data": {
+            "type": "standard",
+            "title": "Greeting",
+            "output": {
+                "generic": [
+                        {
+                        "values": [
+                                {
+                                "text": "Hello! What can I do for you?"
+                                }
+                            ],
+                        "response_type": "text"
+                        }
+                    ]
+                },
+            "conditions": "#hello",
+            "dialog_node": "greeting"
+            }
+        }
+     */
+    public function updateDialog(Request $request)
+    {
+        $ws = $request->get('ws','86e2b89a-8bf9-4a33-a8d3-5b2a2b79583f');
+        $dnode = $request->get('dnode','greeting');
+        $url = "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/{$ws}/dialog_nodes/{$dnode}?version=2018-07-10";
+        $data = [
+                    "output" =>  [
+                        "generic" =>  [
+                             [
+                                "response_type" => "text",
+                                "values" =>  [
+                                    ["text" => "Hello! What can I do for you?"],
+                                ],
+                            ],
+                        ],
+                    ],
+                ];
+        $return = $this->doPost($url,json_encode($data));
+        return response_success(json_decode($return,true));
+    }
 
+    /**
+     * 删除对话节点
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function delDialog(Request $request)
+    {
+        $ws = $request->get('ws','86e2b89a-8bf9-4a33-a8d3-5b2a2b79583f');
+        $dnode = $request->get('dnode','greeting');
+        $url = "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/{$ws}/dialog_nodes/{$dnode}?version=2018-07-10";
 
+        $return = $this->doDel($url);
+        return response_success(json_decode($return,true));
+    }
+
+    ///////////-------获取对用户输入的响应-----//////////////////
+
+    /**
+     * 根据用户输入响应信息
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function message(Request $request)
+    {
+        $ws = $request->get('ws','86e2b89a-8bf9-4a33-a8d3-5b2a2b79583f');
+        $text = $request->get('text','hello');
+        $url = "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/{$ws}/message?version=2018-07-10";
+
+        $data = [
+            'input' => [
+                'text' => $text,
+            ],
+            'alternate_intents' => true,
+        ];
+
+        $return = $this->doPost($url,json_encode($data));
+        return response_success(json_decode($return,true));
+
+    }
+
+    /**
+     * 获取工作区的训练状态
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getStatus(Request $request)
+    {
+        $ws = $request->get('ws','86e2b89a-8bf9-4a33-a8d3-5b2a2b79583f');
+        $url = "https://gateway.watsonplatform.net/assistant/api/v1/workspaces/{$ws}/status?version=2018-07-10";
+        $request = $this->doGet($url);
+        return response_success(json_decode($request,true));
+    }
 
 
 
@@ -475,5 +630,9 @@ class WastonController extends Controller
 
         return $output;
 
+    }
+    public function test()
+    {
+        return response_success(['message' => '测试通过']);
     }
 }

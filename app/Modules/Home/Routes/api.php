@@ -38,7 +38,7 @@ Route::group([
     Route::get('/index_mid','IndexController@index_mid')->name('home.index_mid');
     Route::get('/index_right','IndexController@index_right')->name('home.index_right');
 });
-
+Route::get('test','WastonController@test');
 
 Route::group(['prefix' => 'waston'],function (){
     /**
@@ -100,6 +100,24 @@ Route::group(['prefix' => 'waston'],function (){
     Route::post('update_dialogs','WastonController@updateDialog');
     //删除dialog
     Route::get('del_dialogs','WastonController@delDialog');
+    /**
+     * 获取对用户输入的响应
+     */
+    Route::post('message','WastonController@message');
+    /**
+     * 获取工作区训练状态
+     */
+    Route::get('get_status','WastonController@getStatus');
+});
+
+Route::group(['prefix' => 'yj'],function() {
+    /**
+     * 工作区部分
+     */
+    //获取工作区
+    Route::get('get_ws','YJController@getWs');
+    //添加工作区
+    Route::post('add_ws','WastonController@addWs');
 });
 
 
