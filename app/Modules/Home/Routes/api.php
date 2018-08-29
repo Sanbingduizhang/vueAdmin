@@ -116,8 +116,118 @@ Route::group(['prefix' => 'yj'],function() {
      */
     //获取工作区
     Route::get('get_ws','YJController@getWs');
+    //获取相关工作区的状态
+    Route::get('get_one_ws/{ws}','YJController@getOneWs');
     //添加工作区
-    Route::post('add_ws','WastonController@addWs');
+    Route::post('add_ws','YJController@addWs');
+    //更新工作区
+    Route::post('up_ws/{ws}','YJController@upWs');
+    //删除对应的工作区
+    Route::get('del_ws/{ws}','YJController@delWs');
+    /**
+     * intents部分
+     */
+    //列出intents
+    Route::get('get_intents','YJController@getIntents');
+    //获取单个intents的内容
+    Route::get('get_one_intents','YJController@getOneIntents');
+    //添加intents
+    Route::post('add_intents','YJController@addIntents');
+    //更新intents
+    Route::post('up_intents','YJController@upIntents');
+    //删除intents
+    Route::get('del_intents','YJController@delIntents');
+    /**
+     * examples部分
+     */
+    //列出examples
+    Route::get('get_examples','YJController@getExamples');
+    //列出examples单个信息
+    Route::get('get_one_examples','YJController@getOneExamples');
+    //创建examples
+    Route::post('add_examples','YJController@addExamples');
+    //更新examples
+    Route::post('up_examples','YJController@upExamples');
+    //删除examples
+    Route::get('del_examples','YJController@delExamples');
+    /**
+     * counterexamples部分
+     */
+    //列出counterexamples
+    Route::get('get_cexamples','YJController@getCexamples');
+    //列出counterexamples单个信息
+    Route::get('get_one_cexamples','YJController@getOneCexamples');
+    //创建counterexamples
+    Route::post('add_cexamples','YJController@addCexamples');
+    //更新counterexamples
+    Route::post('up_cexamples','YJController@upCexamples');
+    //删除counterexamples
+    Route::get('del_cexamples','YJController@delCexamples');
+    /**
+     * entities部分
+     */
+    //列出entities
+    Route::get('get_entities','YJController@getEntity');
+    //列出entities单个信息
+    Route::get('get_one_entities','YJController@getOneEntity');
+    //创建entities
+    Route::post('add_entities','YJController@addEntity');
+    //更新entities
+    Route::post('up_entities','YJController@upEntity');
+    //删除entities
+    Route::get('del_entities','YJController@delEntity');
+
+    /**
+     * mentions部分
+     */
+    Route::get('mentions','YJController@mentions');
+
+    /**
+     * entity  values部分
+     */
+    //列出Value
+    Route::get('get_values','YJController@getValue');
+    //列出Value单个信息
+    Route::get('get_one_values','YJController@getOneValue');
+    //创建Value
+    Route::post('add_values','YJController@addValue');
+    //更新Value
+    Route::post('up_values','YJController@upValue');
+    //删除Value
+    Route::get('del_values','YJController@delValue');
+    /**
+     * sysnonyms部分
+     */
+
+
+    /**
+     * dialog部分
+     */
+    //列出dialog
+    Route::get('get_dialog','YJController@getDialog');
+    //列出dialog单个信息
+    Route::get('get_one_dialog','YJController@getOneDialog');
+    //创建dialog
+    Route::post('add_dialog','YJController@addDialog');
+    //更新dialog
+    Route::post('up_dialog','YJController@upDialog');
+    //删除dialog
+    Route::get('del_dialog','YJController@delDialog');
+
+
+    /**
+     * 日志
+     */
+    Route::get('alllogs','YJController@getAllLogs');
+    Route::get('onelogs','YJController@getOneLogs');
+
+
+
+
+    //获取工作区的训练状态
+    Route::get('get-status','YJController@getStatus');
+    //根据用户的输入进行信息的输出
+    Route::get('message','YJController@message');
 });
 
 
