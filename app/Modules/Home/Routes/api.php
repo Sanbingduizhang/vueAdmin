@@ -22,7 +22,7 @@ Route::group([
     //测试的几个接口
     Route::get('/test','HomeController@test')->name('home.test');
     Route::get('/weather','HomeController@weather')->name('home.weather');
-    Route::get('/bd_go','HomeController@bd_go')->name('home.bd_go');
+//    Route::get('/bd_go','HomeController@bd_go')->name('home.bd_go');
     /**
      * 主页显示接口
      */
@@ -231,3 +231,34 @@ Route::group(['prefix' => 'yj'],function() {
 });
 
 
+
+
+Route::group(['prefix' => 'bdai'],function() {
+    //语音合成
+   Route::group(['prefix' => 'spesyn'],function () {
+
+   });
+   //语音识别
+    Route::group(['prefix' => 'sperec'],function () {
+        Route::get('token','BdAiController@getToken');
+        Route::get('sperec','BdAiController@sperec');
+
+    });
+    //文字识别
+    Route::group(['prefix' => 'worrec'],function () {
+
+    });
+    //图像识别
+    Route::group(['prefix' => 'imgrec'],function () {
+
+    });
+    //人脸检测
+    Route::group(['prefix' => 'facdet'],function () {
+
+    });
+    //人脸对比
+    Route::group(['prefix' => 'faccon'],function () {
+
+    });
+});
+Route::get('/bd_go','HomeController@bd_go')->name('home.bd_go');
