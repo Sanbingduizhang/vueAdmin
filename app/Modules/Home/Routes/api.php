@@ -236,28 +236,34 @@ Route::group(['prefix' => 'yj'],function() {
 Route::group(['prefix' => 'bdai'],function() {
     //语音合成
    Route::group(['prefix' => 'spesyn'],function () {
+       //语音合成上传返回数据接口
+       Route::post('spesyn','BdAiController@spesyn');
 
    });
    //语音识别
     Route::group(['prefix' => 'sperec'],function () {
-        Route::get('token','BdAiController@getToken');
-        Route::get('sperec','BdAiController@sperec');
+        //语音识别上传返回数据接口
+        Route::post('sperec','BdAiController@sperec');
 
     });
     //文字识别
     Route::group(['prefix' => 'worrec'],function () {
+        Route::post('worrec','BdAiController@worrec');
 
     });
     //图像识别
     Route::group(['prefix' => 'imgrec'],function () {
+        Route::post('imgrec','BdAiController@imgrec');
 
     });
     //人脸检测
     Route::group(['prefix' => 'facdet'],function () {
+        Route::post('facdet','BdAiController@facdet');
 
     });
     //人脸对比
     Route::group(['prefix' => 'faccon'],function () {
+        Route::post('faccon','BdAiController@faccon');
 
     });
 });
