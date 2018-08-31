@@ -10,6 +10,7 @@ class NovelController extends Controller
 {
     public function getContent()
     {
+        return response_success(['message' => 22]);
 //        header('Access-Control-Allow-Origin', config('cors.allowedOrigins'));
         header('Access-Control-Allow-Origin:*');
         $html = file_get_contents("https://www.zhuaji.org/read/848");

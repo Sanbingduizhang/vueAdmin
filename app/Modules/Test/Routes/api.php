@@ -17,8 +17,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/test', function (Request $request) {
     // return $request->test();
 })->middleware('auth:api');
-Route::group(
-    ['prefix' => 'novel','middleware' => ['cros']],function() {
-        Route::get('/get','NovelController@getContent');
-}
-);
+//Route::group(
+//    ['prefix' => 'novel','middleware' => ['cros']],function() {
+//        Route::get('/get','NovelController@getContent');
+//}
+//);
+Route::post('/get','NovelController@getContent');
