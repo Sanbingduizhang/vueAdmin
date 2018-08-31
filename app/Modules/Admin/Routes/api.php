@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //})->middleware('auth:api');
 Route::group([
     'prefix' => 'admin',
-    'middleware' => ['cros','checktoken']],function () {
+    'middleware' => ['checktoken']],function () {
     Route::group([
        'prefix' => 'cate',
     ],function () {

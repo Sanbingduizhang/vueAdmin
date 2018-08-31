@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //})->middleware('auth:api');
 Route::group([
     'prefix' => 'home',
-    'middleware' => ['cros','checktoken']],function(){
+    'middleware' => ['checktoken']],function(){
     //测试的几个接口
     Route::get('/test','HomeController@test')->name('home.test');
     Route::get('/weather','HomeController@weather')->name('home.weather');
