@@ -106,30 +106,6 @@ if (!function_exists('uploadsFile')) {
         }
         //获取上传文件
         $file = $request->file('file');
-//        $ext = strtolower($file->getClientOriginalExtension()); //文件扩展名
-//        $originName = strtolower($file->getClientOriginalName());  //文件原名
-//        $type = $file->getClientMimeType();     // image/jpeg(真实文件名称)
-//        //判断文件类型是否符合
-//        if(!in_array(strtolower($ext),$option)){
-//
-//            return  1; //'Please upload the specified type of picture:jpg,png,jpeg,gif';
-//        }
-//        //替换后的文件名称及路径
-////        $course['img_path'] ? pathinfo($course['img_path'], PATHINFO_FILENAME) . '.' . $ext : '';
-//        $path1 = date('YmdHis') . '-' . uniqid() . '.' . $ext;
-//        $filesave = $file->storeAs('local', $path1,'local');
-//        if(!$filesave) {
-//            return 2;   //'save is failed';
-//        }
-//
-//        return $options = [
-//            'ext' => $ext,
-//            'originName' => $originName,
-////            'path' => 'http://photo.heijiang.top/uploads/' . $path1,
-//            'path' => storage_path('app/local/') . $path1,
-//            'name' => $path1,
-//            'type' => $type,
-//        ];
 
         if (!is_array($file)) {
             return uploadsOne($file,$option);

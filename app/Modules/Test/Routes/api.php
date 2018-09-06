@@ -14,12 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/test', function (Request $request) {
-    // return $request->test();
-})->middleware('auth:api');
-//Route::group(
-//    ['prefix' => 'novel','middleware' => ['cros']],function() {
-//        Route::get('/get','NovelController@getContent');
-//}
-//);
-Route::post('/get','NovelController@getContent');
+Route::group(['prefix' => 'test'],function () {
+    /**
+     * 工作区部分
+     */
+    //获取工作区
+    Route::get('get_ws','WastonTestController@getWorkspace');
+    //添加工作区
+    Route::post('add_ws','WastonTestController@addWs');
+});

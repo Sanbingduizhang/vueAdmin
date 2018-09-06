@@ -36,7 +36,8 @@
             "App\\": "app/"
         },
         "files":[
-            "app/Helper/help.php"
+            "app/Helper/help.php",
+            "app/Helper/waston.php"
         ]
     },
     "autoload-dev": {
