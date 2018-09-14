@@ -12,22 +12,28 @@ class WastonTestController extends Controller
 
     public function __construct()
     {
+        //才哥的密钥
+//        $params = [
+//                'base_uri' => 'https://gateway.watsonplatform.net/visual-recognition/api/v3',
+//                'version' => 'version=2018-03-19',
+//                'apikey' => 'O1tx-GlvVXW7wJouobqFphMhLi5hhiKGNijlmtLTkuen',
+//        ];
+        //我的密钥
         $params = [
-            'base_uri' => 'https://gateway.watsonplatform.net/assistant/api/v1',
-            'version' => 'version=2018-07-10',
-            'name' => 'b45b1ce6-3f1d-4dd7-a744-1a64a33dd862',
-            'pwd' => 'QBRv8rU7oWIb',
+            'base_uri' => 'https://gateway.watsonplatform.net/visual-recognition/api/v3',
+            'version' => 'version=2018-03-19',
+            'apikey' => 'W3InsithP67OyIO0qddpYpPVtcD6xcNQM-CMf5MUywL_',
         ];
-        $this->newWaston = new \Waston($params);
+        $this->newWaston = new \WastonImg($params);
     }
-
-
-//70eb18f9-e6d1-4eb2-8681-74bd09ad06a5
-
-    public function getWorkspace()
+    public function test()
     {
-        $res = $this->newWaston->getOneIntents(['workspaces' => '70eb18f9-e6d1-4eb2-8681-74bd09ad06a5','intents' => 'people',]);
-//        dd($res);
+        $res = $this->newWaston->ceshi();
+        var_dump($res);exit();
         return response_success($res);
+    }
+    public function getany()
+    {
+        return response_success($_FILES['file']);
     }
 }

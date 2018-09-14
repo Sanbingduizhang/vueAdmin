@@ -7,6 +7,7 @@ use Firebase\JWT\JWT;
 use Illuminate\Http\Request;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
 
 class BaseController extends Controller
 {
@@ -33,12 +34,16 @@ class BaseController extends Controller
         }
         //入库查询
         $searchRes = $this->userInfoRepository
-            ->where(['usercode' => $usercode,'password' => md5($pwd)])
+            ->where(['usercode' => $usercode,'status' => 1])
             ->first();
         if (!$searchRes) {
-            return response_failed('');
+            return response_failed('用户不存在');
         }
-
+        //hash检测密码是否正确
+        $checkRes = Hash::check($pwd,$searchRes->password);
+        if (!$checkRes) {
+            return response_failed('账号或密码错误');
+        }
         $token = $this->issueJwtToken([
             'uid'=>$searchRes->id,
             'usercode'=>$searchRes->usercode,
@@ -79,7 +84,7 @@ class BaseController extends Controller
         //进行入库操作
         $create = $this->userInfoRepository->create([
             'usercode' => $usercode,
-            'password' => md5($pwd),
+            'password' => Hash::make($pwd),
         ]);
         if ($create) {
             return response_success(['message' => '注册成功']);
