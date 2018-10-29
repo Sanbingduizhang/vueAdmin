@@ -84,28 +84,54 @@ class WastonImg
     public function ceshi()
     {
 //        https://gateway.watsonplatform.net/visual-recognition/api/v3/classifiers?verbose=true&version=2018-03-19
-        $url = $this->pubAddr(array('classifiers' => ''));
-//        var_dump($url);exit();
+        $url = $this->pubAddr(array('classify' => ''));
 
-//
-//        $dog1 = new CURLFile(public_path() . '/Beagle.zip','','beagle_positive_examples');
-//        $dog2 = new CURLFile(public_path() . '/GoldenRetriever.zip','','goldenretriever_positive_examples');
-//        $dog3 = new CURLFile(public_path() . '/Husky.zip','','husky_positive_examples');
-//        $dog4 = new CURLFile(public_path() . '/Cats.zip','','negative_examples');
-//
-////////
+        $dog1 = new CURLFile(public_path() . '/beagle.zip','application/zip','beagle.zip');
+
+        $dog2 = new CURLFile(public_path() . '/goldenretriever.zip','application/zip','goldenretriever.zip');
+        $dog3 = new CURLFile(public_path() . '/husky.zip','application/zip','husky.zip');
+        $dog4 = new CURLFile(public_path() . '/cats.zip','application/zip','cats.zip');
+        $dogjpg = new CURLFile(realpath(public_path() . '/timg.jpg'),'','timg.jpg');
+////
+$res = exec('rm -rf /mnt/hgfs/project/Steam/upload/imgzip/15375062185ba47baa26600');
+dd($res);
+        echo $url;
+        var_dump(array(
+            'images_file' => $dogjpg,
+            'owners' => 'me'
+        ));exit();
+        $res = $this->doPost($url,array(
+            'images_file' => $dogjpg,
+            'owners' => 'me'
+        ));
+//        dd(array(
+//            'beagle_positive_examples' => $dog1,
+//            'goldenretriever_positive_examples' => $dog2,
+////            'husky_positive_examples' => $dog3,
+////            'negative_examples' => $dog4,
+//            'name' => 'twodogshhh'
+//        ));
 //        $res = $this->doPost($url,array(
 //            'beagle_positive_examples' => $dog1,
 //            'goldenretriever_positive_examples' => $dog2,
-//            'husky_positive_examples' => $dog3,
-//            'negative_examples' => $dog4,
-//            'name' => 'dogs'
+////            'husky_positive_examples' => $dog3,
+////            'negative_examples' => $dog4,
+//            'name' => 'twodogshhh'
 //        ));
-//        dd(json_decode($res));
-
-        $url = $this->pubAddr(array('classifiers' => ''),array('verbose' => 'true'));
-        $res = $this->doGet($url);
         dd(json_decode($res));
+        $url = $this->pubAddr(array('classifiers' => 'animal_381146038'),array('verbose' => 'true'));
+        $res = $this->doGet($url);
+        dd(json_decode($res,true));
+//
+//
+//
+//
+//        $res = $this->doPost("10.10.12.40:8081/api/test/getany",array(
+//            'a' => new CURLFile(public_path() . '/robots.zip','','beagle_positive_examples'),
+//            'b' => new CURLFile(public_path() . '/robots.zip','','1_positive_examples'),
+//        ));
+//        dd($res);
+
     }
 
     /**
@@ -191,7 +217,6 @@ class WastonImg
      */
     private function doPost($url,$post_data)
     {
-//        dd($post_data);
         $ch = curl_init();
 
         curl_setopt($ch, CURLOPT_URL, $url);
@@ -205,6 +230,8 @@ class WastonImg
         // post的变量
 //        curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_data);
+        curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 0);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 0);
         // 请求头，可以传数组
 //        curl_setopt($ch, CURLOPT_HEADER, $header);
         // 跳过证书检查

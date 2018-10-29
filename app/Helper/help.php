@@ -96,7 +96,7 @@ if (!function_exists('get_or_check_captcha')) {
 
 
 if (!function_exists('uploadsFile')) {
-    function uploadsFile($request,$arr)
+    function uploadsFile($request,$arr = array())
     {
         $option = $arr;             //['jpg','png','jpeg','gif']
         //判断文件是否上传成功
@@ -122,10 +122,11 @@ if (!function_exists('uploadsFile')) {
     function uploadsOne($file,$option)
     {
         $ext = strtolower($file->getClientOriginalExtension()); //文件扩展名
+//        var_dump($ext);
         $originName = strtolower($file->getClientOriginalName());  //文件原名
         $type = $file->getClientMimeType();     // image/jpeg(真实文件名称)
         //判断文件类型是否符合
-        if(!in_array(strtolower($ext),$option)){
+        if(!empty($option) && !in_array(strtolower($ext),$option)){
 
             return  1; //'Please upload the specified type of picture:jpg,png,jpeg,gif';
         }
@@ -162,7 +163,7 @@ if (!function_exists('uploadsFile')) {
             $originName = strtolower($v->getClientOriginalName());  //文件原名
             $type = $v->getClientMimeType();     // image/jpeg(真实文件名称)
             //判断文件类型是否符合
-            if(!in_array(strtolower($ext),$option)){
+            if(!empty($option) && !in_array(strtolower($ext),$option)){
 
                 return  1; //'Please upload the specified type of picture:jpg,png,jpeg,gif';
             }

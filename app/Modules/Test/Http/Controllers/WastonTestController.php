@@ -30,10 +30,12 @@ class WastonTestController extends Controller
     {
         $res = $this->newWaston->ceshi();
         var_dump($res);exit();
-        return response_success($res);
     }
-    public function getany()
+    public function getany(Request $request)
     {
-        return response_success($_FILES['file']);
+        return $_FILES['a'];
+//        return $_FILES['beagle_positive_examples'];
+        $res = uploadsFile($request,[]);
+        return $res;
     }
 }
